@@ -62,8 +62,9 @@ setup(
     platforms='any',
     entry_points={
         'console_scripts': [
-            'ultraviolet-cli = ultraviolet_cli.cli:cli',
-        ],
+            'ultraviolet-cli=ultraviolet_cli.cli:cli',
+            'uv-cli=ultraviolet_cli.cli:cli' # alias shorthand
+        ]
     },
     extras_require=extras_require,
     install_requires=install_requires,
