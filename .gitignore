@@ -63,3 +63,10 @@ target/
 
 # Vim swapfiles
 .*.sw?
+
+
+# default fixtures dir
+fixtures
+
+# mac junk
+.DS_Store
