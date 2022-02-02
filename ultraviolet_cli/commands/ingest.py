@@ -8,11 +8,28 @@
 """Invenio module for custom UltraViolet commands."""
 
 import click
+from ..utils import service_user_token
 
 @click.group()
-@click.version_option()
+def ingest():
+    """
+    An entry point for fixtures subcommands, e.g., ingest
+    """
+    pass
 
-def cli():
+@ingest.command()
+
+@click.option('-u', '--url', required=True, type=str,
+              default='https://127.0.0.1:5000/api',
+              help='Invenio REST API base URL.')
+
+@click.option('-r', '--records-dir', required=True,
+              type=click.Path(exists=True),
+              default='./fixtures', help='Path to directory of fixtures')
+
+@click.option('-t', '--token', help='REST API token; if none provided, new service-user will be created')
+
+def fixtures(url, records_dir, token=None):
     """
     Ingests UV records from a directory of subdirs.
     Each subdir respresents an item.
@@ -20,21 +37,14 @@ def cli():
     Each subdir MAY contain ONE directory labelled 'resources' with resources to post to the item.
     """
 
-@cli.command()
-
-@click.option('-u', '--url', required=True, type=str,
-              default='https://127.0.0.1:5000/api',
-              help='Invenio REST API base URL.')
-
-@click.argument('records_dir', required=True,  type=click.Path(exists=True))
-
-def ingest(url, records_dir):
-    """
-    Ingests UV records from a directory of subdirs.
-    """
-
     click.secho('Invenio REST API.....: ', nl=False, bold=True, fg='green')
     click.secho(url)
 
     click.secho('Records directory..: ', nl=False, bold=True, fg='green')
     click.secho(records_dir)
+
+    if token is None:
+        print("No auth token found; creating new service user account")
+        token = service_user_token()
+
+    print("token:", token)

@@ -10,24 +10,15 @@
 import click
 import os
 
-plugin_folder = os.path.join(os.path.dirname(__file__), 'commands')
+from .commands.ingest import ingest
 
-class UvCli(click.MultiCommand):
+@click.group(help='Invenio module for custom UltraViolet commands.')
 
-    def list_commands(self, ctx):
-        rv = []
-        for filename in os.listdir(plugin_folder):
-            if filename.endswith('.py') and filename != '__init__.py':
-                rv.append(filename[:-3])
-        rv.sort()
-        return rv
+def cli():
+    pass
 
-    def get_command(self, ctx, name):
-        ns = {}
-        fn = os.path.join(plugin_folder, name + '.py')
-        with open(fn) as f:
-            code = compile(f.read(), fn, 'exec')
-            eval(code, ns, ns)
-        return ns['cli']
+def version():
+    """Display the current version."""
+    click.echo(_read_version())
 
-cli = UvCli(help='Invenio module for custom UltraViolet commands.')
+cli.add_command(ingest)
