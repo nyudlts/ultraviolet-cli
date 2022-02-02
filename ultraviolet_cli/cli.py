@@ -17,8 +17,5 @@ from .commands.ingest import ingest
 def cli():
     pass
 
-def version():
-    """Display the current version."""
-    click.echo(_read_version())
 
 cli.add_command(ingest)

@@ -8,43 +8,45 @@
 """Invenio module for custom UltraViolet commands."""
 
 import click
-from ..utils import service_user_token
+import os
+
+from .. import config, utils
 
 @click.group()
 def ingest():
     """
-    An entry point for fixtures subcommands, e.g., ingest
+    An entry point for ingest subcommands, e.g., fixtures
     """
     pass
 
-@ingest.command()
 
+"""
+define fixture ingest
+"""
+@ingest.command()
 @click.option('-u', '--url', required=True, type=str,
               default='https://127.0.0.1:5000/api',
-              help='Invenio REST API base URL.')
-
-@click.option('-r', '--records-dir', required=True,
+              help='Invenio REST API base URL. Default=https://127.0.0.1:5000/api')
+@click.option('-d', '--dir', required=True,
               type=click.Path(exists=True),
-              default='./fixtures', help='Path to directory of fixtures')
-
-@click.option('-t', '--token', help='REST API token; if none provided, new service-user will be created')
-
-def fixtures(url, records_dir, token=None):
+              default='./fixtures', help='Path to directory of fixtures. Default=./fixtures')
+@click.option('-t', '--token', help='REST API token')
+def fixtures(url, dir, token):
     """
-    Ingests UV records from a directory of subdirs.
+    Post UV fixture records via REST API from a directory.
     Each subdir respresents an item.
     Each subdir MUST contain ONE .json metadata record.
     Each subdir MAY contain ONE directory labelled 'resources' with resources to post to the item.
     """
 
-    click.secho('Invenio REST API.....: ', nl=False, bold=True, fg='green')
+    click.secho('Invenio REST API: ', nl=False, bold=True, fg='green')
     click.secho(url)
 
-    click.secho('Records directory..: ', nl=False, bold=True, fg='green')
-    click.secho(records_dir)
+    click.secho('Fixtures directory: ', nl=False, bold=True, fg='green')
+    click.secho(dir)
 
     if token is None:
-        print("No auth token found; creating new service user account")
-        token = service_user_token()
+        token = utils.token_from_user(email=config.FIXTURES_DEFAULT_USER, name='default-su-token')
 
-    print("token:", token)
+    click.secho('Auth Token: ', nl=False, bold=True, fg='green')
+    click.secho(token)

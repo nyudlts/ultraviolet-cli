@@ -10,13 +10,9 @@
 import click
 import os
 
-def service_user_token():
+def token_from_user(email, name='token'):
     """
-    create service user token
+    Create + return token for a given user.
     """
-
-    os.popen("invenio users create uv-cli-su@testing.org --password=123456 --active")
-    os.popen("invenio roles add uv-cli-su@testing.org admin")
-    token = os.popen("invenio tokens create --name uv-cli-su --user uv-cli-su@testing.org").read()
-
+    token = os.popen(f'invenio tokens create --name {name} --user {email}').read()
     return token
