@@ -13,6 +13,7 @@ import os
 from .commands.ingest import ingest
 
 @click.group(help='Invenio module for custom UltraViolet commands.')
+@click.version_option()
 
 def cli():
     pass

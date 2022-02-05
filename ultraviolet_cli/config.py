@@ -7,4 +7,4 @@
 
 """Invenio module for custom Ultravaiolet commands"""
 
-FIXTURES_DEFAULT_USER = 'api-service-user@uv.test'
+FIXTURES_DEFAULT_USER = 'api-su@uv.test'

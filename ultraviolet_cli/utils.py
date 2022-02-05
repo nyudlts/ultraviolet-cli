@@ -14,5 +14,5 @@ def token_from_user(email, name='token'):
     """
     Create + return token for a given user.
     """
-    token = os.popen(f'invenio tokens create --name {name} --user {email}').read()
+    token = os.popen(f'invenio tokens create --name {name} --user {email}').read().strip()
     return token
