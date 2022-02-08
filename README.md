@@ -11,7 +11,7 @@ Invenio module for custom Ultraviolet commands
 
 - Clone the repository
   ``` sh
-  git clone git@github.com:mnyrop/ultraviolet-cli.git && cd ultraviolet-cli
+  git clone git@github.com:nyudlts/ultraviolet-cli.git && cd ultraviolet-cli
   ```
 - Install & use specified python version
   ``` sh
