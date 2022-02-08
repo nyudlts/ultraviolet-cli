@@ -26,5 +26,3 @@ Invenio module for custom Ultraviolet commands
   ``` sh
   pipenv run ultraviolet-cli
   ```
-
-## Use within an UltraViolet instance
