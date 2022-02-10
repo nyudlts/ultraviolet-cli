@@ -3,15 +3,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
 [packages]
 ultraviolet-cli = {editable = true, path = "./"}
+jsonschema = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
-
-[[source]]
-name = "pypi"
-url = "https://pypi.org/simple"
-verify_ssl = true
