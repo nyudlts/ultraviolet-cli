@@ -10,7 +10,7 @@
 import click
 import os
 
-from .commands.ingest import ingest
+from .commands.fixtures import fixtures
 
 @click.group(help='Invenio module for custom UltraViolet commands.')
 @click.version_option()
@@ -18,5 +18,4 @@ from .commands.ingest import ingest
 def cli():
     pass
 
-
-cli.add_command(ingest)
+cli.add_command(fixtures)
