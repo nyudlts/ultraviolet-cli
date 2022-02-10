@@ -19,7 +19,7 @@ Invenio module for custom Ultraviolet commands
   ```
 - Install python requirements in a project pip environment (pipenv)
   ``` sh
-  pip install --upgrade pip pipenv
+  pip install --upgrade -U pip pipenv
   pipenv install
   ```
 - Invoke the `ultraviolet-cli` root command via `pipenv`
