@@ -34,7 +34,15 @@ setup_requires = [
 ]
 
 install_requires = [
+    'click>=8.1.3',
+    'Flask>=2.2.2',
     'invenio-i18n>=1.2.0',
+    'invenio_access>=1.4.4',
+    'invenio_accounts>=2.0.0',
+    'invenio_app>=1.3.4',
+    'invenio_pidstore>=1.2.3'
+    'jsonschema>=4.17.3',
+    'Werkzeug==2.2.2'
 ]
 
 packages = find_packages()

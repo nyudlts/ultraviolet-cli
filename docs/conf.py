@@ -116,13 +116,13 @@ html_theme = 'alabaster'
 
 html_theme_options = {
     'description': 'Invenio module for custom Ultravaiolet commands',
-    'github_user': 'inveniosoftware',
+    'github_user': 'nyudlts',
     'github_repo': 'ultraviolet-cli',
     'github_button': False,
     'github_banner': True,
     'show_powered_by': False,
     'extra_nav_links': {
-        'ultraviolet-cli@GitHub': 'https://github.com/inveniosoftware/ultraviolet-cli',
+        'ultraviolet-cli@GitHub': 'https://github.com/nyudlts/ultraviolet-cli',
         'ultraviolet-cli@PyPI': 'https://pypi.python.org/pypi/ultraviolet-cli/',
     }
 }

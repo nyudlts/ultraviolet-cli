@@ -7,6 +7,10 @@
 Changes
 =======
 
+Version 0.2.0
+
+- Added commands to create Invenio Communities
+
 Version 0.1.0 (released TBD)
 
 - Initial public release.

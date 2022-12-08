@@ -11,11 +11,11 @@ import click
 import os
 
 from .commands.fixtures import fixtures
+from .commands.communities_create import create_communities
+from invenio_app.factory import create_app
+from .utils import create_cli
 
-@click.group(help='Invenio module for custom UltraViolet commands.')
-@click.version_option()
-
-def cli():
-    pass
+cli = create_cli(create_app=create_app)
 
 cli.add_command(fixtures)
+cli.add_command(create_communities)
