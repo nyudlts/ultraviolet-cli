@@ -12,6 +12,7 @@ import os
 
 from .commands.fixtures import fixtures
 from .commands.communities_create import create_communities
+from .commands.record_delete import record_delete
 from invenio_app.factory import create_app
 from .utils import create_cli
 
@@ -19,3 +20,4 @@ cli = create_cli(create_app=create_app)
 
 cli.add_command(fixtures)
 cli.add_command(create_communities)
+cli.add_command(record_delete)

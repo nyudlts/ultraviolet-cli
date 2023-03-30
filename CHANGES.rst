@@ -9,7 +9,7 @@ Changes
 
 Version 0.2.0
 
-- Added commands to create Invenio Communities
+- Added commands to create Invenio Communities and delete records programmatically
 
 Version 0.1.0 (released TBD)
 
