@@ -88,7 +88,7 @@ jobs:
       MQ: ${{ matrix.mq-service }}
       SEARCH: ${{ matrix.search-service }}
       # TODO: Adapt EXTRAS accordingly
-      EXTRAS: all${{ join( [matrix.DB_EXTRAS, matrix.SEARCH_EXTRAS], ',' ) }}
+      EXTRAS: ${{ join( [matrix.DB_EXTRAS, matrix.SEARCH_EXTRAS], ',' ) }}
 
     steps:
       - name: Checkout
