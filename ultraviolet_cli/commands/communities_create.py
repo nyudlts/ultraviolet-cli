@@ -71,3 +71,5 @@ def create_communities(desc, type, visibility, policy, owner, add_group, name):
         click.secho(f"Adding group {add_group} to community...", fg="yellow")
         add_role_to_community(community, add_group, "reader", True)
         click.secho(f"Added role {add_group} successfully", fg="green")
+
+    return 1
