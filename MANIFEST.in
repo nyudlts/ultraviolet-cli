@@ -20,6 +20,7 @@ include *.md
 include *.rst
 include *.sh
 include *.txt
+include .python-version
 include Pipfile
 include babel.ini
 include pytest.ini
