@@ -43,7 +43,9 @@ install_requires = [
     'invenio_app>=1.3.4',
     'invenio_pidstore>=1.2.3',
     'jsonschema>=4.17.3',
-    'Werkzeug==2.2.2'
+    'requests>=2.28.2',
+    'Sphinx>=3,<4',
+    'Werkzeug==2.2.2',
 ]
 
 packages = find_packages()

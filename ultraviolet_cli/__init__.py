@@ -9,5 +9,6 @@
 
 from .ext import ultravioletcli
 from .version import __version__
+from .proxies import current_communities
 
-__all__ = ('__version__', 'ultravioletcli')
+__all__ = ('__version__', 'ultravioletcli', 'current_communities')

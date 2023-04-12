@@ -1,10 +1,8 @@
 import click
-from flask import current_app
 from flask.cli import with_appcontext
-from werkzeug.local import LocalProxy
 from invenio_access.permissions import system_identity
 
-from ..proxies import current_rdm_records
+from ultraviolet_cli.proxies import current_rdm_records
 
 
 @click.command()
