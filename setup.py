@@ -65,19 +65,6 @@ setup(
     author_email='nyu-data-repository@nyu.edu',
     url='https://github.com/nyudlts/ultraviolet-cli',
     packages=packages,
-    package_data={
-        'ultraviolet-cli': ['.python-version',
-                            'pytest.ini',
-                            'PipFile',
-                            'rn-tests.sh',
-                            '*.md',
-                            '*.txt',
-                            '*.rst',
-                            'docs/*',
-                            'ultraviolet_cli/*',
-                            'tests/*'
-                            ]
-    },
     zip_safe=False,
     include_package_data=True,
     platforms='any',
