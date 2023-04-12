@@ -20,7 +20,8 @@ tests_require = [
     'opensearch-dsl>=2.0.0',
     'opensearch-py>=2.0.0',
     'elasticsearch7>=7.10.0',
-    'elasticsearch-dsl7>=7.10.0'
+    'elasticsearch-dsl7>=7.10.0',
+    'psycopg2>=2.9.5',
 ]
 
 extras_require = {
