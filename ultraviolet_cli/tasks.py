@@ -5,12 +5,14 @@
 # ultraviolet-cli is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-from .proxies import current_communities
-from flask import current_app
+"""Invenio module for custom Ultraviolet commands."""
+
+from invenio_access.permissions import system_identity
+from invenio_accounts.models import User
 from invenio_access.utils import get_identity
 from invenio_pidstore.errors import PIDAlreadyExists
-from invenio_accounts.models import User
-from invenio_access.permissions import system_identity
+
+from .proxies import current_communities
 
 
 def create_community(data, owner):

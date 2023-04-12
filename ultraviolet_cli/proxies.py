@@ -10,11 +10,15 @@
 import flask
 from werkzeug.local import LocalProxy
 
-current_communities = LocalProxy(lambda: flask.current_app.extensions["invenio-communities"])
+current_communities = LocalProxy(
+    lambda: flask.current_app.extensions["invenio-communities"]
+)
 """Proxy to the extension."""
 
 current_app = LocalProxy(lambda: flask.current_app)
 """Proxy to the current app."""
 
-current_rdm_records = LocalProxy(lambda: flask.current_app.extensions["invenio-rdm-records"])
+current_rdm_records = LocalProxy(
+    lambda: flask.current_app.extensions["invenio-rdm-records"]
+)
 """Proxy to RDM Records module."""

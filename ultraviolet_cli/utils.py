@@ -7,15 +7,17 @@
 
 """Invenio module for custom UltraViolet commands."""
 
-import click
-import os
 import json
+import os
+
+import click
 from flask.cli import FlaskGroup
 from flask.helpers import get_debug_flag
 
 
 def create_cli(create_app=None):
     """Create CLI for ``ultraviolet-cli`` command.
+
     :param create_app: Flask application factory.
     :returns: Click command group.
     """
@@ -23,6 +25,7 @@ def create_cli(create_app=None):
     # function is thus
     def create_cli_app(*args):
         """Application factory for CLI app.
+
         Internal function for creating the CLI. When invoked via
         ``ultraviolet-cli`` FLASK_APP must be set.
         """
@@ -51,10 +54,10 @@ def create_cli(create_app=None):
 
 
 def token_from_user(email, name='token'):
-    """
-    Create + return token for a given user.
-    """
-    token = os.popen(f'invenio tokens create --name {name} --user {email}').read().strip()
+    """Create + return token for a given user."""
+    token = os.popen(
+        f'invenio tokens create --name {name} --user {email}'
+    ).read().strip()
     return token
 
 

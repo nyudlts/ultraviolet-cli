@@ -1,9 +1,20 @@
-import click
-from flask.cli import with_appcontext
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2022 NYU Libraries.
+#
+# ultraviolet-cli is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+"""Invenio module for custom UltraViolet commands."""
+
 import json
 
-from ultraviolet_cli.utils import create_community_data
+import click
+from flask.cli import with_appcontext
+
 from ultraviolet_cli.tasks import create_community, add_role_to_community
+from ultraviolet_cli.utils import create_community_data
+
 
 
 @click.command()
@@ -50,24 +61,41 @@ from ultraviolet_cli.tasks import create_community, add_role_to_community
     "-g",
     "--add-group",
     type=str,
-    help="Automatically adds the Group to the community. Group/Role needs to be provided as input and "
-         "needs to be created prior. Adds the given group as a reader by default",
+    help="Automatically adds the Group to the community. "
+         "Group/Role needs to be provided as input and "
+         "needs to be created prior. Adds the given group "
+         "as a reader by default.",
 )
 @click.argument('name')
 @with_appcontext
-def create_communities(desc, type, visibility, policy, owner, add_group, name):
-    """Create a community for Ultraviolet"""
+def create_communities(desc, type, visibility, policy,
+                       owner, add_group, name):
+    """Create a community for Ultraviolet."""
     click.secho("Creating community...", fg="yellow")
 
-    community_data = create_community_data(name, desc, type, visibility, policy)
-    click.secho(f"Created community data:\n{json.dumps(community_data, indent=2)}", fg="green")
+    community_data = create_community_data(
+        name, desc, type, visibility, policy
+    )
+    click.secho(
+        f"Created community data:"
+        f"\n{json.dumps(community_data, indent=2)}",
+        fg="green"
+    )
     community = create_community(community_data, owner)
-    click.secho(f"Created community {name} successfully with ID: {community.id}. Optionally, you can append this ID "
-                f"to COMMUNITIES_AUTO_UPDATE list in invenio.cfg to setup automatic update of community group "
+    click.secho(f"Created community {name} successfully with ID: "
+                f"{community.id}. Optionally, you can append this "
+                f"ID to COMMUNITIES_AUTO_UPDATE list in invenio.cfg"
+                f" to setup automatic update of community group "
                 f"members.", fg="green")
     if add_group:
-        click.secho(f"Adding group {add_group} to community...", fg="yellow")
+        click.secho(
+            f"Adding group {add_group} to community...",
+            fg="yellow"
+        )
         add_role_to_community(community, add_group, "reader", True)
-        click.secho(f"Added role {add_group} successfully", fg="green")
+        click.secho(
+            f"Added role {add_group} successfully",
+            fg="green"
+        )
 
     return 1

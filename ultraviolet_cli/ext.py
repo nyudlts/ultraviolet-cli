@@ -5,7 +5,7 @@
 # ultraviolet-cli is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-"""Invenio module for custom Ultravaiolet commands"""
+"""Invenio module for custom Ultraviolet commands."""
 
 from flask_babelex import gettext as _
 
