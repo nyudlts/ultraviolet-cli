@@ -15,6 +15,7 @@ readme = open('README.rst').read()
 history = open('CHANGES.rst').read()
 
 tests_require = [
+    'Flask-BabelEx>=0.9.4',
     'pytest-invenio>=1.4.0',
 ]
 
