@@ -17,6 +17,7 @@ import tempfile
 import pytest
 from flask import Flask
 from flask_babelex import Babel
+from invenio_app.factory import create_ui
 
 from ultraviolet_cli import ultravioletcli
 from ultraviolet_cli.views import blueprint
@@ -32,13 +33,6 @@ def celery_config():
 
 
 @pytest.fixture(scope='module')
-def create_app(instance_path):
+def create_app():
     """Application factory fixture."""
-    def factory(**config):
-        app = Flask('testapp', instance_path=instance_path)
-        app.config.update(**config)
-        Babel(app)
-        ultravioletcli(app)
-        app.register_blueprint(blueprint)
-        return app
-    return factory
+    return create_ui

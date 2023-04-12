@@ -10,14 +10,15 @@
 See https://pytest-invenio.readthedocs.io/ for documentation on which test
 fixtures are available.
 """
+from pytest_invenio.fixtures import cli_runner
+
 from ultraviolet_cli.commands.communities_create import create_communities
 
 
-def test_cli_create_communities(app):
+def test_cli_create_communities(cli_runner):
     """Test create user CLI."""
-    runner = app.test_cli_runner()
 
-    result = runner.invoke(
+    result = cli_runner.invoke(
         create_communities, ["testcommunity", "--desc", "Test Community"]
     )
     assert result.exit_code != 0
