@@ -9,7 +9,7 @@
 
 from .communities_create import create_communities
 from .fixtures import create_record_draft, delete_record_draft, fixtures, \
-                       ingest, publish_record, purge, validate
+    ingest, publish_record, purge, validate
 from .record_delete import record_delete
 
 __all__ = (

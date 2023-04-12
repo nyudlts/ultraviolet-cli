@@ -139,7 +139,7 @@ def ingest(api, dir, output, token):
 
     for file in records:
         click.secho(f'Posting record from {file}', nl=True, fg='blue')
-        dict  = json.loads(open(file).read())
+        dict = json.loads(open(file).read())
         draft = create_record_draft(dict, api, token)
         uv_id = os.path.dirname(file).split('/')[-1]
 

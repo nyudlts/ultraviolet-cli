@@ -17,6 +17,10 @@ history = open('CHANGES.rst').read()
 tests_require = [
     'Flask-BabelEx>=0.9.4',
     'pytest-invenio>=1.4.0',
+    'opensearch-dsl>=2.0.0',
+    'opensearch-py>=2.0.0',
+    'elasticsearch7>=8.7.0',
+    'elasticsearch-dsl7>=7.10.0'
 ]
 
 extras_require = {
