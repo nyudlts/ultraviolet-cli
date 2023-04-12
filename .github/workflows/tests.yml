@@ -24,12 +24,12 @@ jobs:
           # a new item to the following lists.
           # You can see the complete list of services and versions that are available at:
           # https://docker-services-cli.readthedocs.io/en/latest/configuration.html
-          python-version: [3.6, 3.7, 3.8, 3.9]
+          python-version: [3.8, 3.9]
           requirements-level: [min, pypi]
           cache-service: [redis]
-          db-service: [postgresql9, postgresql11, mysql5, mysql8]
+          db-service: [postgresql12]
           mq-service: [rabbitmq, redis]
-          search-service: [elasticsearch6, elasticsearch7]
+          search-service: [elasticsearch7, opensearch2]
 
           exclude:
           # Add combinations to this list that should be excluded from the final
@@ -42,45 +42,30 @@ jobs:
           - python-version: 3.9
             requirements-level: min
 
-          - db-service: postgresql11
-            python-version: 3.6
-
-          - db-service: mysql8
-            python-version: 3.6
-
           - search-service: elasticsearch7
-            python-version: 3.6
-
-          - search-service: elasticsearch6
             db-service: postgresql11
 
-          - search-service: elasticsearch6
-            db-service: mysql8
-
           - search-service: elasticsearch7
-            db-service: postgresql9
+            db-service: postgresql12
 
-          - search-service: elasticsearch7
-            db-service: mysql5
+          - search-service: opensearch2
+            db-service: postgresql11
+
+          - search-service: opensearch2
+            db-service: postgresql12
 
           include:
-          - db-service: postgresql9
-            DB_EXTRAS: "postgresql"
-
           - db-service: postgresql11
             DB_EXTRAS: "postgresql"
 
-          - db-service: mysql5
-            DB_EXTRAS: "mysql"
-
-          - db-service: mysql8
-            DB_EXTRAS: "mysql"
-
-          - search-service: elasticsearch6
-            SEARCH_EXTRAS: "elasticsearch6"
+          - db-service: postgresql12
+            DB_EXTRAS: "postgresql"
 
           - search-service: elasticsearch7
             SEARCH_EXTRAS: "elasticsearch7"
+
+          - search-service: opensearch2
+            SEARCH_EXTRAS: "opensearch2"
 
     env:
       CACHE: ${{ matrix.cache-service }}
@@ -88,7 +73,7 @@ jobs:
       MQ: ${{ matrix.mq-service }}
       SEARCH: ${{ matrix.search-service }}
       # TODO: Adapt EXTRAS accordingly
-      EXTRAS: "postgresql, mysql, elasticsearch6, elasticsearch7"
+      EXTRAS: "postgresql, opensearch2, elasticsearch7"
 
     steps:
       - name: Checkout
