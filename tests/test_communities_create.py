@@ -18,7 +18,7 @@ from ultraviolet_cli.commands.communities_create import create_communities
 def test_cli_create_communities(cli_runner):
     """Test create user CLI."""
 
-    result = cli_runner.invoke(
+    result = cli_runner(
         create_communities, ["testcommunity", "--desc", "Test Community"]
     )
     assert result.exit_code != 0
