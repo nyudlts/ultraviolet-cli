@@ -15,7 +15,6 @@ from time import sleep
 
 import click
 import requests
-
 from jsonschema import Draft4Validator
 from urllib3.exceptions import InsecureRequestWarning
 
@@ -50,6 +49,7 @@ def create_record_draft(metadata, api, token):
 
     response.raise_for_status()
     return response.json()
+
 
 def delete_record_draft(pid, api, token):
     """Delete a record draft using Requests."""
@@ -90,6 +90,7 @@ def publish_record(record_metadata, access_token):
                              verify=False)
 
     return response.json()
+
 
 @click.group()
 def fixtures():
@@ -195,8 +196,6 @@ def purge(api, dir, output, token):
     os.makedirs(os.path.dirname(output), exist_ok=True)
     with open(output, "w") as f:
         json.dump(results, f)
-
-
 
 
 @fixtures.command()

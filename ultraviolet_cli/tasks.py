@@ -8,8 +8,8 @@
 """Invenio module for custom Ultraviolet commands."""
 
 from invenio_access.permissions import system_identity
-from invenio_accounts.models import User
 from invenio_access.utils import get_identity
+from invenio_accounts.models import User
 from invenio_pidstore.errors import PIDAlreadyExists
 
 from .proxies import current_communities
@@ -40,6 +40,3 @@ def add_role_to_community(community, group, role, visibility):
             "visible": visibility,
         },
     )
-
-
-

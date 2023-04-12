@@ -12,9 +12,8 @@ import json
 import click
 from flask.cli import with_appcontext
 
-from ultraviolet_cli.tasks import create_community, add_role_to_community
+from ultraviolet_cli.tasks import add_role_to_community, create_community
 from ultraviolet_cli.utils import create_community_data
-
 
 
 @click.command()

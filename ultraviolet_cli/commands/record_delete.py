@@ -24,5 +24,5 @@ def record_delete(pid):
     except Exception:
         click.secho(f"Could not delete record: PID {pid} not found", fg="red")
         return False
-    click.secho(f"Deleted record {pid} successfully",fg="green")
+    click.secho(f"Deleted record {pid} successfully", fg="green")
     return True
