@@ -48,7 +48,7 @@ jobs:
           - search-service: elasticsearch7
             python-version: 3.8
 
-          - search-service: elasticsearch6
+          - search-service: elasticsearch7
             db-service: postgresql11
 
           - search-service: opensearch2
