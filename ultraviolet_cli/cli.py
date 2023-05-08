@@ -9,13 +9,15 @@
 
 from invenio_app.factory import create_app
 
-from .commands.communities_create import create_communities
+from .commands.create_communities import create_communities
+from .commands.delete_record import delete_record
 from .commands.fixtures import fixtures
-from .commands.record_delete import record_delete
+from .commands.upload_files import upload_files
 from .utils import create_cli
 
 cli = create_cli(create_app=create_app)
 
 cli.add_command(fixtures)
 cli.add_command(create_communities)
-cli.add_command(record_delete)
+cli.add_command(delete_record)
+cli.add_command(upload_files)

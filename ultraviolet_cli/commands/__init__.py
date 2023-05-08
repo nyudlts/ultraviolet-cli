@@ -7,14 +7,14 @@
 
 """Invenio module for custom UltraViolet commands."""
 
-from .communities_create import create_communities
+from .create_communities import create_communities
 from .fixtures import create_record_draft, delete_record_draft, fixtures, \
     ingest, publish_record, purge, validate
-from .record_delete import record_delete
+from .delete_record import delete_record
 
 __all__ = (
     "create_communities",
-    "record_delete",
+    "delete_record",
     "create_record_draft",
     "delete_record_draft",
     "publish_record",

@@ -13,3 +13,5 @@ DEFAULT_FIXTURES_DIR = './fixtures/records'
 DEFAULT_SCHEMA_PATH = './fixtures/schemas/record-v4.0.0.json'
 DEFAULT_FIXTURES_OUTFILE = './tmp/fixture-map.json'
 DEFAULT_RECORDS_API_URL = 'https://127.0.0.1:5000/api/records'
+
+DEFAULT_CHUNK_SIZE = 5*1024*1024

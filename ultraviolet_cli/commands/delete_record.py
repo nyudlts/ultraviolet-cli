@@ -17,7 +17,7 @@ from ultraviolet_cli.proxies import current_rdm_records
 @click.command()
 @click.argument('pid')
 @with_appcontext
-def record_delete(pid):
+def delete_record(pid):
     """Delete Record from Ultraviolet."""
     try:
         current_rdm_records.records_service.delete(system_identity, pid)
