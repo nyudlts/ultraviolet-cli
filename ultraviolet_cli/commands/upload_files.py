@@ -6,17 +6,20 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 """Invenio module for custom UltraViolet commands."""
+import os
+import uuid
+
 import click
 from flask.cli import with_appcontext
 from invenio_db import db
 from invenio_files_rest.models import MultipartObject, Part
 from invenio_pidstore.errors import PIDDoesNotExistError
-import os
 from six import BytesIO
 import uuid
 
-from ultraviolet_cli.proxies import current_rdm_records
 from ultraviolet_cli.config import DEFAULT_CHUNK_SIZE
+from ultraviolet_cli.proxies import current_rdm_records
+
 
 
 @click.command()
@@ -34,33 +37,36 @@ from ultraviolet_cli.config import DEFAULT_CHUNK_SIZE
     default="",
     help="Visibility of the community.",
 )
-@click.argument('pid')
+@click.argument("pid")
 @with_appcontext
 def upload_files(file, directory, pid):
     """Upload file for a draft."""
-
     try:
         draft = current_rdm_records.records_service.draft_cls.pid.resolve(
             pid, registered_only=False
         )
     except PIDDoesNotExistError:
-        click.secho(f"PID {pid} does not exist. Please check input.", fg="red")
+        click.secho(f"PID {pid} does not exist. Please check input.",
+                    fg="red")
         return -1
 
     click.secho(
-        f"Uploading files to Draft: {draft['metadata']['title']}...", fg="green"
+        f"Uploading files to Draft: {draft['metadata']['title']}...",
+        fg="green"
     )
 
     uploads = []
     if file:
         if not os.path.exists(os.path.abspath(file)):
-            click.secho(f"File {file} does not exist. Please check input.", fg="red")
+            click.secho(f"File {file} does not exist. Please check input.",
+                        fg="red")
             return -1
         uploads.append(os.path.abspath(file))
     if directory:
         if not os.path.exists(os.path.abspath(directory)):
             click.secho(
-                f"Directory {directory} does not exist. Please check input.", fg="red"
+                f"Directory {directory} does not exist. Please check input.",
+                fg="red"
             )
             return -1
         for item in os.listdir(directory):
@@ -68,14 +74,15 @@ def upload_files(file, directory, pid):
 
     if not file and not directory:
         click.secho(
-            f"Please specify a file or directory to upload using -f or -d.", fg="red"
+            f"Please specify a file or directory to upload using -f or -d.",
+            fg="red"
         )
         return -1
     for upload in uploads:
         file_size = os.stat(upload).st_size
         file_name = os.path.basename(upload)
         if file_size < DEFAULT_CHUNK_SIZE:
-            obj = open(upload, 'rb')
+            obj = open(upload, "rb")
         else:
             n_chunks = int(file_size / DEFAULT_CHUNK_SIZE)
             last_chunk = file_size % DEFAULT_CHUNK_SIZE
@@ -86,7 +93,9 @@ def upload_files(file, directory, pid):
                 chunk_size=DEFAULT_CHUNK_SIZE,
             )
             with open(upload, "rb") as f:
-                with click.progressbar(length=file_size, label=f"{file_name}:") as bar:
+                with click.progressbar(
+                    length=file_size, label=f"{file_name}:"
+                ) as bar:
                     try:
                         for i in range(n_chunks + 1):
                             if i < n_chunks:
@@ -100,7 +109,11 @@ def upload_files(file, directory, pid):
                             bar.update(part_size)
                     except Exception as err:
                         db.session.rollback()
-                        click.secho(f"\nError while uploading {file_name}: {err}", fg="red")
+                        click.secho(
+                            f"\nError while uploading "
+                            f"{file_name}: {err}",
+                            fg="red"
+                        )
                         return -1
             mp.complete()
             db.session.commit()
@@ -108,8 +121,12 @@ def upload_files(file, directory, pid):
             obj = mp.merge_parts(version_id=version_id)
             db.session.commit()
         if file_name in draft.files:
-            click.secho(f"{file_name} already exists in draft.", fg="yellow")
-            new_file_name = input("Press Enter to replace existing file or type in the new file name:\n")
+            click.secho(
+                f"{file_name} already exists in draft.", fg="yellow")
+            new_file_name = input(
+                "Press Enter to replace existing file or "
+                "type in the new file name:\n"
+            )
             if new_file_name:
                 file_name = new_file_name
         draft.files[file_name] = obj
