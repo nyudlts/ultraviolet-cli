@@ -12,7 +12,7 @@ fixtures are available.
 """
 from pytest_invenio.fixtures import cli_runner
 
-from ultraviolet_cli.commands.communities_create import create_communities
+from ultraviolet_cli.commands.create_communities import create_communities
 
 
 def test_cli_create_communities(cli_runner):
