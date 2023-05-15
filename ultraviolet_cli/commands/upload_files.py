@@ -7,6 +7,7 @@
 
 """Invenio module for custom UltraViolet commands."""
 import os
+import uuid
 
 import click
 from flask.cli import with_appcontext
@@ -14,7 +15,7 @@ from invenio_db import db
 from invenio_files_rest.models import MultipartObject, Part
 from invenio_pidstore.errors import PIDDoesNotExistError
 from six import BytesIO
-import uuid
+
 
 from ultraviolet_cli.config import DEFAULT_CHUNK_SIZE
 from ultraviolet_cli.proxies import current_rdm_records
@@ -33,7 +34,7 @@ from ultraviolet_cli.proxies import current_rdm_records
     "--directory",
     type=click.Path(),
     default="",
-    help="Visibility of the community.",
+    help="Directory with the files to be uploaded.",
 )
 @click.argument("pid")
 @with_appcontext

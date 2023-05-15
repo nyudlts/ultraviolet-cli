@@ -12,7 +12,6 @@ from .delete_record import delete_record
 from .fixtures import create_record_draft, delete_record_draft, fixtures, \
     ingest, publish_record, purge, validate
 
-
 __all__ = (
     "create_communities",
     "delete_record",

@@ -64,3 +64,43 @@ pipenv run ultraviolet-cli create-communities -d "Another community for NYU stud
 The code assumes owner and the group are valid within Invenio, otherwise, they have to be created for the code to complete successfully.
 
 ## Delete Records
+
+### Usage
+```sh
+Usage: ultraviolet-cli delete-record [OPTIONS] PID
+
+  Delete Record from Ultraviolet.
+
+Options:
+  --help  Show this message and exit.
+```
+
+### Example
+
+```sh
+pipenv run ultraviolet-cli delete-record pid1-sample
+```
+
+## Upload Files
+
+### Usage
+```sh
+Usage: ultraviolet-cli upload-files [OPTIONS] PID
+
+  Upload file for a draft.
+
+Options:
+  -f, --file PATH       File to be uploaded.
+  -d, --directory PATH  Directory with the files to be uploaded.
+  --help                Show this message and exit.
+```
+
+### Example
+
+```sh
+pipenv run ultraviolet-cli upload-files -f file_path pid1-sample
+```
+
+```sh
+pipenv run ultraviolet-cli upload-files -d dir_path pid1-sample
+```

@@ -21,6 +21,7 @@ from marshmallow.exceptions import ValidationError
 from ultraviolet_cli.proxies import current_communities
 from ultraviolet_cli.utils import create_community_data
 
+
 @click.command()
 @click.option(
     "-d",
