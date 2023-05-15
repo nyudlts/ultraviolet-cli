@@ -19,6 +19,9 @@ def test_cli_create_communities(cli_runner):
     result = cli_runner(
         create_communities, b'testcommunity', ["--desc", "Test Community"]
     )
+    print(result.exception)
+    print(result.stdout_bytes)
+    print(result.stderr_bytes)
     assert result.return_value == 0
 
 
