@@ -7,9 +7,10 @@
 
 """Invenio module for custom UltraViolet commands."""
 
-import json
-
 import click
+import json
+import os
+
 from flask.cli import with_appcontext
 from invenio_access.permissions import system_identity
 from invenio_access.utils import get_identity
@@ -18,7 +19,7 @@ from invenio_communities.members.errors import InvalidMemberError
 from invenio_pidstore.errors import PIDAlreadyExists
 from marshmallow.exceptions import ValidationError
 
-from ultraviolet_cli.proxies import current_communities
+from ultraviolet_cli.proxies import current_communities, current_app
 from ultraviolet_cli.utils import create_community_data
 
 
@@ -76,6 +77,11 @@ from ultraviolet_cli.utils import create_community_data
 def create_communities(desc, type, visibility, policy,
                        owner, add_group, name):
     """Create a community for Ultraviolet."""
+    current_app["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+        "SQLALCHEMY_DATABASE_URI",
+        "postgresql+psycopg2://nyudatarepository:changeme@"
+        "localhost/nyudatarepository"
+    )
     click.secho("Creating community...", fg="yellow")
 
     community_data = create_community_data(

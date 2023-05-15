@@ -9,9 +9,10 @@
 
 import click
 from flask.cli import with_appcontext
+import os
 from invenio_access.permissions import system_identity
 
-from ultraviolet_cli.proxies import current_rdm_records
+from ultraviolet_cli.proxies import current_rdm_records, current_app
 
 
 @click.command()
@@ -19,6 +20,11 @@ from ultraviolet_cli.proxies import current_rdm_records
 @with_appcontext
 def delete_record(pid):
     """Delete Record from Ultraviolet."""
+    current_app["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+        "SQLALCHEMY_DATABASE_URI",
+        "postgresql+psycopg2://nyudatarepository:changeme@"
+        "localhost/nyudatarepository"
+    )
     try:
         current_rdm_records.records_service.delete(system_identity, pid)
     except Exception:

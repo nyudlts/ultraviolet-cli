@@ -17,7 +17,7 @@ from invenio_pidstore.errors import PIDDoesNotExistError
 from six import BytesIO
 
 from ultraviolet_cli.config import DEFAULT_CHUNK_SIZE
-from ultraviolet_cli.proxies import current_rdm_records
+from ultraviolet_cli.proxies import current_rdm_records, current_app
 
 
 @click.command()
@@ -39,6 +39,11 @@ from ultraviolet_cli.proxies import current_rdm_records
 @with_appcontext
 def upload_files(file, directory, pid):
     """Upload file for a draft."""
+    current_app["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+        "SQLALCHEMY_DATABASE_URI",
+        "postgresql+psycopg2://nyudatarepository:changeme@"
+        "localhost/nyudatarepository"
+    )
     try:
         draft = current_rdm_records.records_service.draft_cls.pid.resolve(
             pid, registered_only=False
