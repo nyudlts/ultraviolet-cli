@@ -5,10 +5,12 @@ Invenio module for custom Ultraviolet commands
 ## Prerequisites
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Pyenv](https://github.com/pyenv/pyenv#installation)
+- [OpenSSL >= 1.1](https://www.openssl.org/source/)
 
 
 ## Install and run locally
 
+- Please make sure OpenSSL >= 1.1.0 on your machine. Install/Update of OpenSSL varies from one machine to another.
 - Clone the repository
   ``` sh
   git clone git@github.com:nyudlts/ultraviolet-cli.git && cd ultraviolet-cli
@@ -59,7 +61,7 @@ Options:
 ### Example
 
 ```sh
-pipenv run ultraviolet-cli create-communities -d "Another community for NYU students" -g "nyustudents" -o "sampleadmin@nyu.edu" "NYU Students Community"
+pipenv run ultraviolet-cli create-communities -d "Community for NYU students" -g "nyustudents" -o "sampleadmin@nyu.edu" "NYU Students Community"
 ```
 The code assumes owner and the group are valid within Invenio, otherwise, they have to be created for the code to complete successfully.
 

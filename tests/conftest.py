@@ -14,7 +14,6 @@ import pytest
 from invenio_app.factory import create_ui
 
 
-
 @pytest.fixture(scope='module')
 def celery_config():
     """Override pytest-invenio fixture.

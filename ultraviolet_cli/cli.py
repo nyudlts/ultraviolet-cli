@@ -7,6 +7,8 @@
 
 """Invenio module for custom UltraViolet commands."""
 
+from flask import current_app
+import os
 from invenio_app.factory import create_app
 
 from .commands.create_communities import create_communities
@@ -16,6 +18,7 @@ from .commands.upload_files import upload_files
 from .utils import create_cli
 
 cli = create_cli(create_app=create_app)
+SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI", "postgresql+psycopg2://nyudatarepository:changeme@localhost/nyudatarepository")
 
 cli.add_command(fixtures)
 cli.add_command(create_communities)

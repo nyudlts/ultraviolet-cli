@@ -16,7 +16,6 @@ from invenio_files_rest.models import MultipartObject, Part
 from invenio_pidstore.errors import PIDDoesNotExistError
 from six import BytesIO
 
-
 from ultraviolet_cli.config import DEFAULT_CHUNK_SIZE
 from ultraviolet_cli.proxies import current_rdm_records
 
