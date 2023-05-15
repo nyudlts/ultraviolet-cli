@@ -15,12 +15,7 @@ readme = open('README.rst').read()
 history = open('CHANGES.rst').read()
 
 tests_require = [
-    'Flask-BabelEx>=0.9.4',
     'pytest-invenio>=1.4.0',
-    'opensearch-dsl>=2.0.0',
-    'opensearch-py>=2.0.0',
-    'elasticsearch7>=7.10.0',
-    'elasticsearch-dsl7>=7.10.0',
     'psycopg2>=2.9.5',
 ]
 
@@ -42,13 +37,17 @@ setup_requires = [
 install_requires = [
     'click>=8.1.3',
     'Flask>=2.2.2',
+    'Flask-BabelEx>=0.9.4',
     'invenio-i18n>=1.2.0',
     'invenio-files-rest>=1.4.0',
     'invenio-access>=1.4.4',
     'invenio-accounts>=2.0.0',
     'invenio-app>=1.3.4',
     'invenio-pidstore>=1.2.3',
+    'invenio-rdm-records>=1.0.0'
     'invenio-search>=2.1.0',
+    'opensearch-dsl>=2.0.0',
+    'opensearch-py>=2.0.0',
     'jsonschema>=4.17.3',
     'requests>=2.28.2',
     'Sphinx>=3,<4',

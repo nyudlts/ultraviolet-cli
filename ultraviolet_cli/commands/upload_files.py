@@ -7,7 +7,6 @@
 
 """Invenio module for custom UltraViolet commands."""
 import os
-import uuid
 
 import click
 from flask.cli import with_appcontext
@@ -19,7 +18,6 @@ import uuid
 
 from ultraviolet_cli.config import DEFAULT_CHUNK_SIZE
 from ultraviolet_cli.proxies import current_rdm_records
-
 
 
 @click.command()

@@ -21,4 +21,26 @@ def test_cli_create_communities(cli_runner):
     result = cli_runner(
         create_communities, b'testcommunity', ["--desc", "Test Community"]
     )
-    assert result.exit_code == 1
+    assert result.exit_code == 0
+
+
+def test_cli_wrong_owner(cli_runner):
+    """Test create user CLI."""
+
+    result = cli_runner(
+        create_communities, b'testcommunity', ["--desc", "Test Community", "--owner", "wrongowner@abc.com"]
+    )
+    assert result.exit_code == -1
+
+
+def test_cli_duplicate_community(cli_runner):
+    """Test create user CLI."""
+
+    result = cli_runner(
+        create_communities, b'testcommunity', ["--desc", "Test Community"]
+    )
+    assert result.exit_code == 0
+    result = cli_runner(
+        create_communities, b'testcommunity', ["--desc", "Test Community"]
+    )
+    assert result.exit_code == -2

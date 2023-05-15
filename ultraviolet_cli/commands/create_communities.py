@@ -11,10 +11,15 @@ import json
 
 import click
 from flask.cli import with_appcontext
+from invenio_access.permissions import system_identity
+from invenio_access.utils import get_identity
+from invenio_accounts.models import User
+from invenio_communities.members.errors import InvalidMemberError
+from invenio_pidstore.errors import PIDAlreadyExists
+from marshmallow.exceptions import ValidationError
 
-from ultraviolet_cli.tasks import add_role_to_community, create_community
+from ultraviolet_cli.proxies import current_communities
 from ultraviolet_cli.utils import create_community_data
-
 
 @click.command()
 @click.option(
@@ -77,24 +82,58 @@ def create_communities(desc, type, visibility, policy,
     )
     click.secho(
         f"Created community data:"
-        f"\n{json.dumps(community_data, indent=2)}",
-        fg="green"
+        f"\n{json.dumps(community_data, indent=2)}"
     )
-    community = create_community(community_data, owner)
+
+    service = current_communities.service
+    try:
+        owner_identity = get_identity(
+            User.query.filter_by(email=owner).one()
+        )
+    except Exception:
+        click.secho(f"Could not get owner successfully. "
+                    f"Is {owner} a valid owner?", fg="red")
+        return -1
+
+    try:
+        community = service.create(data=community_data,
+                                   identity=owner_identity)
+    except (PIDAlreadyExists, ValidationError) as err:
+        click.secho(f"Error Creating Community: {err}"
+                    f"\nAborting...", fg="red")
+        return -2
+
     click.secho(f"Created community {name} successfully with ID: "
                 f"{community.id}. Optionally, you can append this "
                 f"ID to COMMUNITIES_AUTO_UPDATE list in invenio.cfg"
                 f" to setup automatic update of community group "
                 f"members.", fg="green")
     if add_group:
+        members_service = current_communities.service.members
+        try:
+            members_service.add(
+                system_identity,
+                community.id,
+                {
+                    "members": [
+                        {"type": "group", "id": add_group}
+                    ],
+                    "role": "reader",
+                    "visible": True,
+                },
+            )
+        except InvalidMemberError:
+            click.secho(
+                f"Group {add_group} not created yet. "
+                f"Please create group using:\n\n"
+                f"pipenv run invenio roles create {add_group}\n\n"
+                f"And then, add the role manually.",
+                fg="red"
+            )
+            return -3
         click.secho(
-            f"Adding group {add_group} to community...",
-            fg="yellow"
-        )
-        add_role_to_community(community, add_group, "reader", True)
-        click.secho(
-            f"Added role {add_group} successfully",
+            f"Added group {add_group} successfully",
             fg="green"
         )
 
-    return 1
+    return 0
