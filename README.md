@@ -59,6 +59,8 @@ Options:
 ### Example
 
 ```sh
-
+pipenv run ultraviolet-cli create-communities -d "Another community for NYU students" -g "nyustudents" -o "sampleadmin@nyu.edu" "NYU Students Community"
 ```
+The code assumes owner and the group are valid within Invenio, otherwise, they have to be created for the code to complete successfully.
 
+## Delete Records

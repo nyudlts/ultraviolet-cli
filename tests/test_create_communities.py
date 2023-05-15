@@ -10,8 +10,6 @@
 See https://pytest-invenio.readthedocs.io/ for documentation on which test
 fixtures are available.
 """
-from pytest_invenio.fixtures import cli_runner
-
 from ultraviolet_cli.commands.create_communities import create_communities
 
 

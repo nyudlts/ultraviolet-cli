@@ -10,17 +10,9 @@
 See https://pytest-invenio.readthedocs.io/ for documentation on which test
 fixtures are available.
 """
-
-import shutil
-import tempfile
-
 import pytest
-from flask import Flask
-from flask_babelex import Babel
 from invenio_app.factory import create_ui
 
-from ultraviolet_cli import ultravioletcli
-from ultraviolet_cli.views import blueprint
 
 
 @pytest.fixture(scope='module')
@@ -36,3 +28,13 @@ def celery_config():
 def create_app():
     """Application factory fixture."""
     return create_ui
+
+
+@pytest.fixture(scope="module")
+def cli_runner(base_app):
+    """Create a CLI runner for testing a CLI command."""
+
+    def cli_invoke(command, *args, input=None):
+        return base_app.test_cli_runner().invoke(command, args, input=input)
+
+    return cli_invoke
