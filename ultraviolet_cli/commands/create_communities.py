@@ -10,6 +10,7 @@
 
 import json
 import os
+import sys
 
 import click
 from flask.cli import with_appcontext
@@ -101,7 +102,7 @@ def create_communities(desc, type, visibility, policy,
     except Exception:
         click.secho(f"Could not get owner successfully. "
                     f"Is {owner} a valid owner?", fg="red")
-        return -1
+        sys.exit(-1)
 
     try:
         community = service.create(data=community_data,
@@ -109,7 +110,7 @@ def create_communities(desc, type, visibility, policy,
     except (PIDAlreadyExists, ValidationError) as err:
         click.secho(f"Error Creating Community: {err}"
                     f"\nAborting...", fg="red")
-        return -2
+        sys.exit(-2)
 
     click.secho(f"Created community {name} successfully with ID: "
                 f"{community.id}. Optionally, you can append this "
@@ -144,4 +145,4 @@ def create_communities(desc, type, visibility, policy,
             fg="green"
         )
 
-    return 0
+    sys.exit(0)
