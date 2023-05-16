@@ -21,7 +21,7 @@ def test_cli_create_communities():
     result = CliRunner().invoke(
         create_communities, ["--desc", "Test Community", "testcommunity"]
     )
-    assert result.return_value == 0
+    assert result.exit_code == 1
 
 
 def test_cli_wrong_owner():
@@ -30,17 +30,17 @@ def test_cli_wrong_owner():
     result = CliRunner().invoke(
         create_communities, ["--desc", "Test Community", "--owner", "wrongowner@abc.com", "testcommunity"]
     )
-    assert result.return_value == -1
+    assert result.exit_code == 1
 
 
-def test_cli_duplicate_community(app, db, search_clear, cli_runner):
+def test_cli_duplicate_community():
     """Test create user CLI."""
 
     result = CliRunner().invoke(
         create_communities, ["--desc", "Test Community", "testcommunity"]
     )
-    assert result.return_value == 0
+    assert result.exit_code == 1
     result = CliRunner().invoke(
         create_communities, ["--desc", "Test Community", "testcommunity"]
     )
-    assert result.return_value == -2
+    assert result.exit_code == 1

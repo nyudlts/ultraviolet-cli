@@ -7,10 +7,11 @@
 
 """Invenio module for custom UltraViolet commands."""
 
-import click
+
 import json
 import os
 
+import click
 from flask.cli import with_appcontext
 from invenio_access.permissions import system_identity
 from invenio_access.utils import get_identity
@@ -19,7 +20,7 @@ from invenio_communities.members.errors import InvalidMemberError
 from invenio_pidstore.errors import PIDAlreadyExists
 from marshmallow.exceptions import ValidationError
 
-from ultraviolet_cli.proxies import current_communities, current_app
+from ultraviolet_cli.proxies import current_app, current_communities
 from ultraviolet_cli.utils import create_community_data
 
 

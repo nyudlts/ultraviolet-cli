@@ -6,13 +6,13 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 """Invenio module for custom UltraViolet commands."""
+import os
 
 import click
 from flask.cli import with_appcontext
-import os
 from invenio_access.permissions import system_identity
 
-from ultraviolet_cli.proxies import current_rdm_records, current_app
+from ultraviolet_cli.proxies import current_app, current_rdm_records
 
 
 @click.command()
