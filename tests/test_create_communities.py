@@ -10,35 +10,37 @@
 See https://pytest-invenio.readthedocs.io/ for documentation on which test
 fixtures are available.
 """
+from click.testing import CliRunner
+
 from ultraviolet_cli.commands.create_communities import create_communities
 
 
-def test_cli_create_communities(app, location, db, search_clear, cli_runner):
+def test_cli_create_communities():
     """Test create user CLI."""
 
-    result = cli_runner(
-        create_communities, "--desc", "Test Community", "testcommunity"
+    result = CliRunner().invoke(
+        create_communities, ["--desc", "Test Community", "testcommunity"]
     )
     assert result.return_value == 0
 
 
-def test_cli_wrong_owner(app, location, db, search_clear, cli_runner):
+def test_cli_wrong_owner():
     """Test create user CLI."""
 
-    result = cli_runner(
-        create_communities, "--desc", "Test Community", "--owner", "wrongowner@abc.com", "testcommunity"
+    result = CliRunner().invoke(
+        create_communities, ["--desc", "Test Community", "--owner", "wrongowner@abc.com", "testcommunity"]
     )
     assert result.return_value == -1
 
 
-def test_cli_duplicate_community(app, location, db, search_clear, cli_runner):
+def test_cli_duplicate_community(app, db, search_clear, cli_runner):
     """Test create user CLI."""
 
-    result = cli_runner(
-        create_communities, "--desc", "Test Community", "testcommunity"
+    result = CliRunner().invoke(
+        create_communities, ["--desc", "Test Community", "testcommunity"]
     )
     assert result.return_value == 0
-    result = cli_runner(
-        create_communities, "--desc", "Test Community", "testcommunity"
+    result = CliRunner().invoke(
+        create_communities, ["--desc", "Test Community", "testcommunity"]
     )
     assert result.return_value == -2
