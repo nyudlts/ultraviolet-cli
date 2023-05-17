@@ -15,10 +15,10 @@ from click.testing import CliRunner
 from ultraviolet_cli.commands.create_communities import create_communities
 
 
-def test_cli_create_communities():
+def test_cli_create_communities(cli_runner):
     """Test create user CLI."""
 
-    result = CliRunner().invoke(
+    result = cli_runner(
         create_communities, ["--desc", "Test Community", "testcommunity"]
     )
     assert result.output == 0
