@@ -25,6 +25,7 @@ def celery_config():
 
 @pytest.fixture(scope='module')
 def create_app():
+    """Create an API and UI for testing Invenio related features."""
     return create_ui_api
 
 
