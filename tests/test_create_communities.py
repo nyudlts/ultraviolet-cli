@@ -19,7 +19,7 @@ def test_cli_create_communities(cli_runner):
     """Test create user CLI."""
 
     result = cli_runner(
-        create_communities, ["--desc", "Test Community", "testcommunity"]
+        create_communities, None, ["--desc", "Test Community", "testcommunity"]
     )
     assert result.output == 0
 
