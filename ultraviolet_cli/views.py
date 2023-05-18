@@ -4,11 +4,12 @@
 #
 # ultraviolet-cli is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
+"""Invenio module for custom UltraViolet commands."""
 
-"""Version information for ultraviolet-cli.
+from flask import Blueprint
 
-This file is imported by ``ultraviolet_cli.__init__``,
-and parsed by ``setup.py``.
-"""
-
-__version__ = '0.2.0'
+blueprint = Blueprint(
+    'ultraviolet_cli',
+    __name__,
+    static_folder='static',
+)

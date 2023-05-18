@@ -16,6 +16,21 @@
 include .dockerignore
 include .editorconfig
 include .tx/config
+include *.md
+include *.rst
+include *.sh
+include *.txt
+include .python-version
+include Pipfile
+include babel.ini
+include pytest.ini
 prune docs/_build
 recursive-include .github/workflows *.yml
 recursive-include ultraviolet_cli/translations *.po *.pot *.mo
+recursive-include docs *.bat
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs *.txt
+recursive-include docs Makefile
+recursive-include tests *.py
+recursive-include ultraviolet_cli *.py

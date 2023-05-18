@@ -7,15 +7,17 @@
 
 """Invenio module for custom UltraViolet commands."""
 
-import click
-import os
+from invenio_app.factory import create_app
 
+from .commands.create_communities import create_communities
+from .commands.delete_record import delete_record
 from .commands.fixtures import fixtures
+from .commands.upload_files import upload_files
+from .utils import create_cli
 
-@click.group(help='Invenio module for custom UltraViolet commands.')
-@click.version_option()
-
-def cli():
-    pass
+cli = create_cli(create_app=create_app)
 
 cli.add_command(fixtures)
+cli.add_command(create_communities)
+cli.add_command(delete_record)
+cli.add_command(upload_files)

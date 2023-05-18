@@ -7,6 +7,13 @@
 Changes
 =======
 
+Version 0.2.0
+
+- Added commands to
+    1. Create Invenio Communities
+    2. Delete records programmatically
+    3. Upload files to a draft programmatically
+
 Version 0.1.0 (released TBD)
 
 - Initial public release.
