@@ -176,6 +176,9 @@ install_requires = [
     'zipstream-ng==1.6.0',
     'python-dotenv',
     'invenio-app-rdm',
+    'check-manifest',
+    'pytest',
+    'invenio-cli'
 ]
 
 
