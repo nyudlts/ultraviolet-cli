@@ -19,10 +19,15 @@ Invenio module for custom Ultraviolet commands
   ``` sh
   pyenv install --skip-existing
   ```
-- Install python requirements in a project pip environment (pipenv)
+- Install python requirements in a project pip environment (pipenv) based on setup.py
   ``` sh
   pip install --upgrade -U pip pipenv
-  pipenv install
+  pipenv run pip install -e .
+  pipenv lock
+  ```
+- Set up environment variable (SQLAlchemy database URI)
+  ``` sh
+  export INVENIO_SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://nyudatarepository:changeme@localhost/nyudatarepository”
   ```
 - Invoke the `ultraviolet-cli` root command via `pipenv`
   ``` sh
@@ -82,6 +87,7 @@ Options:
 ```sh
 pipenv run ultraviolet-cli delete-record pid1-sample
 ```
+The code delete a published record, not a draft one.
 
 ## Upload Files
 

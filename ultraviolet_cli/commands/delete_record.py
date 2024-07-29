@@ -20,7 +20,7 @@ from ultraviolet_cli.proxies import current_app, current_rdm_records
 @with_appcontext
 def delete_record(pid):
     """Delete Record from Ultraviolet."""
-    current_app["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+    current_app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
         "SQLALCHEMY_DATABASE_URI",
         "postgresql+psycopg2://nyudatarepository:changeme@"
         "localhost/nyudatarepository"
@@ -28,7 +28,7 @@ def delete_record(pid):
     try:
         current_rdm_records.records_service.delete(system_identity, pid)
     except Exception:
-        click.secho(f"Could not delete record: PID {pid} not found", fg="red")
+        click.secho(f"Could not delete record: PID {pid} does not exist or is assigned to a draft record.", fg="red")
         return False
     click.secho(f"Deleted record {pid} successfully", fg="green")
     return True
