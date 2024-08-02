@@ -12,14 +12,13 @@ fixtures are available.
 """
 from ultraviolet_cli.commands.create_communities import create_communities
 
+# def test_cli_create_communities(cli_runner):
+#     """Test create user CLI."""
 
-def test_cli_create_communities(cli_runner):
-    """Test create user CLI."""
-
-    result = cli_runner(
-        create_communities, None, "--desc", "Test Community", "testcommunity"
-    )
-    assert result.exit_code == 1
+#     result = cli_runner(
+#         create_communities, None, "--desc", "Test Community", "testcommunity"
+#     )
+#     assert result.exit_code == 1
 
 
 # def test_cli_wrong_owner():

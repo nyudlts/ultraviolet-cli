@@ -12,6 +12,7 @@ fixtures are available.
 """
 import pytest
 from invenio_app.factory import create_app as create_ui_api
+from invenio_db import db
 
 
 @pytest.fixture(scope='module')
@@ -29,11 +30,36 @@ def create_app():
     return create_ui_api
 
 
-# @pytest.fixture(scope="module")
-# def cli_runner(base_app):
-#     """Create a CLI runner for testing a CLI command."""
-#
-#     def cli_invoke(command, *args, input=None):
-#         return base_app.test_cli_runner().invoke(command, args, input=input)
-#
-#     return cli_invoke
+@pytest.fixture(scope="module")
+def base_app(create_app):
+    """Create a base app for testing."""
+    app = create_app()
+    with app.app_context():
+        yield app
+
+
+@pytest.fixture(scope="module")
+def cli_runner(base_app):
+    """Create a CLI runner for testing a CLI command."""
+    def cli_invoke(command, args, input=None):
+        return base_app.test_cli_runner().invoke(command, args, input=input)
+
+    return cli_invoke
+
+
+@pytest.fixture(scope='function', autouse=True)
+def session(base_app):
+    """Create a new database session for a test."""
+    connection = db.engine.connect()
+    transaction = connection.begin()
+
+    options = dict(bind=connection, binds={})
+    session = db.create_scoped_session(options=options)
+
+    db.session = session
+
+    yield session
+
+    transaction.rollback()
+    connection.close()
+    session.remove()

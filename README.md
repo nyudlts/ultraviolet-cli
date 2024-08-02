@@ -112,3 +112,57 @@ pipenv run ultraviolet-cli upload-files -f file_path pid1-sample
 ```sh
 pipenv run ultraviolet-cli upload-files -d dir_path pid1-sample
 ```
+
+## Update Vocabularies
+
+### Usage
+```sh
+Usage: ultraviolet-cli update_vocabularies vocabulary_key vocabulary_data
+
+  Adds a new entry to the Ultraviolet vocabulary.
+
+Arguments:
+  VOCABULARY_TYPE       Type of vocabulary to update. Valid options including:
+                        languages (lng), licenses (lic), resourcetypes (rsrct), 
+                        creatorsroles (crr), affiliations (aff), subjects (sub)  [required]
+  VOCABULARY_TYPE       JSON string containing the vocabulary entry data  [required]
+
+Options:
+  --help                Show this message and exit.
+```
+### Example
+
+```sh
+ultraviolet-cli update-vocabularies languages '{"id": "testid", "tags": ["individual", "living"], "props": {"alpha_2": "22"}, "title": {"en": "testlanguagetitle"}, "type": "languages"}'
+
+ultraviolet-cli update-vocabularies lng '{"id": "testid", "tags": ["individual", "living"], "props": {"alpha_2": "22"}, "title": {"en": "testlanguagetitle"}, "type": "languages"}'
+
+```
+The code add a new language record to vocabulary.
+
+
+```sh
+ultraviolet-cli update-vocabularies sub'{"id": "http://www.test.com", "scheme": "FOS", "subject": "test subject", "type": "subjects"}'
+
+```
+The code add a new subject record to vocabulary.
+
+Required Fields for vocabularies:
+
+- Languages (lng):
+  Required: id, title, props, tags, type
+
+- Licenses (lic):
+  Required: id, tags, props, title, type
+
+- Resource Types (rsrct):
+  Required: id, title, props, tags, type
+
+- Creators Roles (crr):
+  Required: id, title, props, type
+
+- Subjects (sub):
+  Required: id, scheme, subject
+
+- Affiliations (aff):
+  Required: id, identifiers, name, title
