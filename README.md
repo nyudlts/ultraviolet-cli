@@ -142,10 +142,35 @@ The code add a new language record to vocabulary.
 
 
 ```sh
-ultraviolet-cli update-vocabularies sub'{"id": "http://www.test.com", "scheme": "FOS", "subject": "test subject", "type": "subjects"}'
+ultraviolet-cli update-vocabularies sub '{"id": "http://www.test.com", "scheme": "FOS", "subject": "test subject", "type": "subjects"}'
 
 ```
 The code add a new subject record to vocabulary.
+
+
+```sh
+ultraviolet-cli update-vocabularies rsrct '{"id": "testid", "tags": ["testtag1", "testtag2"], "props": {"csl": "testcsl", "datacite_general": "testdatacite_general", "datacite_type": "testdatacite_type", "openaire_resourceType": "testopenaire_resourceType", "openaire_type": "testopenaire_type", "schema.org": "https://schema.org/testschema", "subtype": "testsubtype", "subtype_name": "testsubtype_name", "type": "testtype", "type_icon": "testtype_icon", "type_name": "testtype_name"}, "title": {"en": "testtitle"}, "type": "resourcetypes"}'
+
+```
+The code add a new resource type record to vocabulary.
+
+```sh
+ultraviolet-cli update-vocabularies creatorsroles '{"id": "testid", "type": "creatorsroles", "props": {"datacite": "testdatacite"}, "title": {"en": "testtitle"}}'
+
+```
+The code add a new creator role record to vocabulary.
+
+```sh
+ultravoilet-cli update-vocabularies licenses '{"id": "TEST-ID", "icon": "https://example.com/icon.png", "tags": ["TAG1", "TAG2"], "props": {"url": "https://example.com/license", "scheme": "spdx", "osi_approved": "y"}, "title": {"en": "Example License"}, "type": "licenses"}'
+```
+The code add a new license record to vocabulary.
+
+```sh
+ultraviolet-cli update-vocabularies affiliations '{"acronym": "TST", "id": "TESTID123", "identifiers": [{"identifier": "019wvm591","scheme": "ror"}],"name": "Test University", "title": {"en": "Test University", "fr": "Université de Test"}}'
+```
+The code add a new affiliation record to vocabulary.
+
+
 
 Required Fields for vocabularies:
 

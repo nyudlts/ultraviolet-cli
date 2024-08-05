@@ -113,6 +113,34 @@ def test_cli_update_vocabularies_licenses(cli_runner):
     assert 'vocabulary and index refreshed' in result.output
 
 
+# Test successful update of 'licenses' vocabulary without approved.
+# Expects zero exit code and 'vocabulary and index refreshed' message.
+def test_cli_update_vocabularies_licenses_without_approved(cli_runner):
+    test_data = {
+        "id": "TEST-ID",
+        "icon": "https://example.com/icon.png",
+        "tags": ["TAG1", "TAG2"],
+        "props": {
+            "url": "https://example.com/license",
+            "scheme": "",
+            "osi_approved": ""
+        },
+        "title": {
+            "en": "Example License"
+        },
+        "type": "licenses"
+    }
+
+    test_data_json = json.dumps(test_data)
+
+    result = cli_runner(
+        update_vocabularies, ["licenses", test_data_json]
+    )
+
+    assert result.exit_code == 0
+    assert 'vocabulary and index refreshed' in result.output
+
+
 # Test successful update of 'resourcetypes' vocabulary.
 # Expects zero exit code and 'vocabulary and index refreshed' message.
 def test_cli_update_vocabularies_resourcetypes(cli_runner):
