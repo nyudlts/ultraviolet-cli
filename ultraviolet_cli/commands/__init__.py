@@ -23,4 +23,5 @@ __all__ = (
     "purge",
     "validate",
     "update_vocabularies",
+    'create_draft_records',
 )

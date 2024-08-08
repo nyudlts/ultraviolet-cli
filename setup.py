@@ -34,27 +34,6 @@ setup_requires = [
     'Babel>=2.8',
 ]
 
-# install_requires = [
-#     'click>=8.1.3',
-#     'Flask>=2.2.2',
-#     'Flask-BabelEx>=0.9.4',
-#     'invenio-i18n>=1.2.0',
-#     'invenio-files-rest>=1.4.0',
-#     'invenio-access>=1.4.4',
-#     'invenio-accounts>=2.0.0',
-#     'invenio-app>=1.3.4',
-#     'invenio-pidstore>=1.2.3',
-#     'invenio-rdm-records>=1.0.0',
-#     'invenio-search>=2.1.0',
-#     'opensearch-dsl>=2.0.0',
-#     'opensearch-py>=2.0.0',
-#     'jsonschema>=4.17.3',
-#     'requests>=2.28.2',
-#     # 'Sphinx>=3,<4',
-#     'sphinx>=5.2.1',
-#     'Werkzeug==2.2.2',
-# ]
-
 install_requires = [
     'alembic==1.11.1',
     'amqp==5.1.1',
@@ -153,7 +132,6 @@ install_requires = [
     'redis==5.0.0b4',
     'referencing==0.29.0',
     'requests>=2.28.2',
-    # 'sphinx>=5.2.1',
     'Sphinx>=3,<4',
     'rpds-py==0.7.1',
     'sentry-sdk==1.25.1',
