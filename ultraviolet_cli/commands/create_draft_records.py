@@ -185,11 +185,16 @@ def create_draft_records(name, owner, data):
     try:
         service = current_rdm_records.records_service
         draft_record = service.create(identity, jsonData)
+        default_bucket = draft_record._record.bucket
 
         bucket = Bucket.create(location=location)
 
-        draft_record.bucket = bucket
-        draft_record.bucket_id = bucket.id
+        draft_record._record.bucket = bucket
+        draft_record._record.bucket_id = bucket.id
+
+        if default_bucket:
+            db.session.delete(default_bucket)
+
         db.session.commit()
 
         click.secho(
