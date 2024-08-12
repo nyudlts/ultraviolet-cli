@@ -212,7 +212,7 @@ Usage: ultraviolet-cli create-draft-records [OPTIONS]
 Options:
   -o, --owner TEXT      Email address of the designated owner of the
                         community.  [default: owner@nyu.edu]
-  -d, --data            Record metadata
+  -d, --data            Record metadata.
   --help                Show this message and exit.
 ```
 
