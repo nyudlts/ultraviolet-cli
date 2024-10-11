@@ -21,5 +21,7 @@ __all__ = (
     "fixtures",
     "ingest",
     "purge",
-    "validate"
+    "validate",
+    "update_vocabularies",
+    'create_draft_records',
 )
