@@ -25,13 +25,24 @@ Invenio module for custom Ultraviolet commands
   pipenv run pip install -e .
   pipenv lock
   ```
-- Set up environment variable (SQLAlchemy database URI)
+- Set up db uri
   ```sh
-  export INVENIO_SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://nyudatarepository:changeme@localhost/nyudatarepository”
+  export SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://ultraviolet:ultraviolet@localhost/ultraviolet”
   ```
 - Invoke the `ultraviolet-cli` root command via `pipenv`
   ```sh
   pipenv run ultraviolet-cli
+  ```
+
+## Testing
+
+- Set up testing db
+  ```sh
+  export SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://invenio-app-rdm:invenio-app-rdm@localhost/invenio-app-rdm
+  ```
+- Run tests
+  ```sh
+  bash run-tests.sh
   ```
 
 ## Create Communities
@@ -222,4 +233,5 @@ Options:
 pipenv run ultraviolet-cli create-draft-records -o adminUV@test.com -d '{"access": {"record": "public","files": "public"},"files": {"enabled": true},"metadata": {"title": "A Romans story","publication_date": "2020-06-01","publisher": "Acme Inc","resource_type": {"id": "image-photo"},"creators":[{"person_or_org":{"name":"Troy Inc.","type":"organizational"}}]}}'
 
 ```
+
 The code create a draft record and return the PID in cmd.

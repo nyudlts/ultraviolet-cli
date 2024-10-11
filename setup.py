@@ -35,7 +35,7 @@ setup_requires = [
 ]
 
 install_requires = [
-    'babel==2.10.3',
+    'babel>=2.16.0',
     'click>=8.1.3',
     'Flask>=2.2.2',
     'Flask-Babel>=4.0.0',
