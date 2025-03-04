@@ -82,12 +82,12 @@ pipenv run ultraviolet-cli create-communities -d "Community for NYU students" -g
 
 The code assumes owner and the group are valid within Invenio, otherwise, they have to be created for the code to complete successfully.
 
-## Delete Records
+## Delete Records (Soft)
 
 ### Usage
 
 ```sh
-Usage: ultraviolet-cli delete-record [OPTIONS] PID removalreason-pid-value [removalreason-note]
+Usage: ultraviolet-cli delete-record-soft [OPTIONS] PID removalreason-pid-value [removalreason-note]
 
   Delete Record from Ultraviolet.
 
@@ -98,10 +98,29 @@ Options:
 ### Example
 
 ```sh
-pipenv run ultraviolet-cli delete-record pid1-sample deaccession "Officially removed by NYU staff."
+pipenv run ultraviolet-cli delete-record-soft pid1-sample deaccession "Officially removed by NYU staff."
 ```
 
 The code soft delete a published record, not a draft one, leave a metadata-only tombstone page.
+
+## Delete Records (Hard)
+
+### Usage
+```sh
+Usage: ultraviolet-cli delete-record-hard [OPTIONS] PID
+
+  Delete Record from Ultraviolet.
+
+Options:
+  --help  Show this message and exit.
+```
+
+### Example
+
+```sh
+pipenv run ultraviolet-cli delete-record-hard pid1-sample
+```
+
 
 ## Upload Files
 

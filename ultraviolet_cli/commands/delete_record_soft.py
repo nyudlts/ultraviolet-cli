@@ -20,7 +20,7 @@ from ultraviolet_cli.proxies import current_app, current_rdm_records
 @click.argument('removal_reason_id')
 @click.argument('note', required=False)
 @with_appcontext
-def delete_record(pid, removal_reason_id, note):
+def delete_record_soft(pid, removal_reason_id, note):
     """Delete (soft-delete) a published record in UltraViolet with a tombstone."""
     current_app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
         "SQLALCHEMY_DATABASE_URI",

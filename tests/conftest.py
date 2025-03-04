@@ -11,6 +11,7 @@ See https://pytest-invenio.readthedocs.io/ for documentation on which test
 fixtures are available.
 """
 from collections import namedtuple
+from invenio_search.proxies import current_search_client
 
 import pytest
 from flask_security.utils import hash_password
@@ -89,6 +90,42 @@ def valid_data():
         }
     }
 
+
+@pytest.fixture(scope="function")
+def minimal_record():
+    """Minimal record data as dict coming from the external world."""
+    return {
+        "pids": {},
+        "access": {
+            "record": "public",
+            "files": "public",
+        },
+        "files": {
+            "enabled": False,  # Most tests don't care about files
+        },
+        "metadata": {
+            "creators": [
+                {
+                    "person_or_org": {
+                        "family_name": "Brown",
+                        "given_name": "Troy",
+                        "type": "personal",
+                    }
+                },
+                {
+                    "person_or_org": {
+                        "name": "Troy Inc.",
+                        "type": "organizational",
+                    },
+                },
+            ],
+            "publication_date": "2020-06-01",
+            # because DATACITE_ENABLED is True, this field is required
+            "publisher": "Acme Inc",
+            "resource_type": {"id": "image-photo"},
+            "title": "A Romans story",
+        },
+    }
 
 @pytest.fixture()
 def roles(app, db):
@@ -268,9 +305,18 @@ def resource_type_type(app):
     return vocabulary_service.create_type(
         system_identity, "resourcetypes", "rsrct")
 
+@pytest.fixture(scope="module")
+def init_vocabulary_indexes(app):
+    """Ensure vocabulary indexes are created and refreshed."""
+    # Initialize the vocabulary index
+    try:
+        Vocabulary.index.create()
+        current_search_client.indices.refresh(index=Vocabulary.index._name)
+    except:
+        pass
 
 @pytest.fixture(scope="module")
-def resource_type_v(app, resource_type_type):
+def resource_type_v(app, resource_type_type, init_vocabulary_indexes):
     """Resource type vocabulary record."""
     vocabulary_service.create(
         system_identity,
@@ -620,6 +666,37 @@ def awards_v(app, funders_v):
     return award
 
 
+@pytest.fixture(scope="module")
+def removal_reasons_type(app):
+    """Removal reasons vocabulary type."""
+    return vocabulary_service.create_type(system_identity, "removalreasons", "rem")
+
+
+@pytest.fixture(scope="module")
+def removal_reasons_v(app, removal_reasons_type):
+    vocabulary_service.create(
+        system_identity,
+        {
+            "id": "copyright",
+            "title": {"en": "of copyright infringement"},
+            "type": "removalreasons",
+        },
+    )
+
+    vocab = vocabulary_service.create(
+        system_identity,
+        {
+            "id": "retracted",
+            "title": {"en": "The study has been retracted/withdrawn."},
+            "type": "removalreasons",
+        },
+    )
+
+    # Refresh the index to make the vocabulary available
+    Vocabulary.index.refresh()
+
+    return vocab
+
 @pytest.fixture(scope="function")
 def cache():
     """Empty cache."""
@@ -650,6 +727,7 @@ RunningApp = namedtuple(
         "funders_v",
         "awards_v",
         "creatorsroles_type",
+        "removal_reasons_v",
         "community_type_record",
     ],
 )
@@ -674,6 +752,7 @@ def running_app(
     funders_v,
     awards_v,
     creatorsroles_type,
+    removal_reasons_v,
     community_type_record,
 ):
     """This fixture provides an app with the typically needed db data loaded.
@@ -699,6 +778,7 @@ def running_app(
         funders_v,
         awards_v,
         creatorsroles_type,
+        removal_reasons_v,
         community_type_record,
     )
 

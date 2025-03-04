@@ -18,7 +18,7 @@ from ultraviolet_cli.proxies import current_app, current_rdm_records
 @click.command()
 @click.argument('pid')
 @with_appcontext
-def delete_record(pid):
+def delete_record_hard(pid):
     """Delete a record from Ultraviolet."""
     current_app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
         "SQLALCHEMY_DATABASE_URI",
